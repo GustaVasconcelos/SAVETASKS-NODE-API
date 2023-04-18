@@ -1,5 +1,5 @@
-import Usuarios from '../models/User.js';
-import servicos from '../services/services.js'
+import Usuarios from '../../models/User.js';
+import servicos from '../../services/services.js'
 
 /* ------ deletar item na lista --------- */
 export const deletarTarefa = async (req,res) =>{

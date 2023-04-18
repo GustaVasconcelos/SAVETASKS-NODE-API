@@ -1,5 +1,5 @@
-import Usuarios from '../models/User.js';
-import servicos from '../services/services.js'
+import Usuarios from '../../models/User.js';
+import servicos from '../../services/services.js'
 
 /* ------ Adicionar item na lista --------- */
 export const adicionarLista = async (req,res) =>{
