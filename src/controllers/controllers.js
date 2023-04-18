@@ -1,6 +1,34 @@
 import Usuarios from '../models/User.js';
 import servicos from '../services/services.js'
 
+/* ------ Pesquisar o usuário pelo o id */
+const pesquisarUsuarioId = async (req,res) =>{
+  
+    //Campos necessário para a pesquisa
+    const id_usuario = req.params.id
+
+    //Verificação se não há campos vázios
+    if(!id_usuario){
+        res.status(400).json({ message: "Preencha todos os campos" });
+    }
+
+    try{
+        //Procurando o usuário no banco de dados
+        const usuario = await servicos.pesquisarUsuarioPorId(id_usuario)
+
+        //Verificação se caso não tenha um usúario
+        if(!usuario){
+            res.status(400).json({ message: "Usuário não encontrado" });
+        }
+        
+        //Se caso o usuário for encontrado
+        res.status(200).json({mensagem:'Usuário encontrado',usuario})
+    }catch(err){
+        return res.status(400).json({ message: "Erro ao pesquisar pelo o usuário" });
+    }
+}
+/* ------ fim pesquisar o usuário pelo o id */
+
 /* ------Cadastrar usuario--------- */
 const cadastrarUsuario = async (req, res) => {
     //Campos necessário para a criação do usuário no banco de dados
@@ -27,7 +55,7 @@ const cadastrarUsuario = async (req, res) => {
       return res.status(201).json({ message: "Usuário cadastrado", usuarioCriado });
 
     } catch (error) {
-      return res.status(400).json({ message: "Erro ao criar o usuário" });
+      return res.status(500).json({ message: "Erro ao criar o usuário" });
     }
   };
 /* ------ fim Cadastrar usuario--------- */
@@ -56,13 +84,15 @@ const adicionar_lista = async (req,res) =>{
         //Cadastrando a tarefa na lista do usuário
         const tarefaAdicionar = await servicos.adicionarTarefa(usuario,id_tarefa, titulo, descricao)
 
-        return res.status(200).json({mensagem:'Item adicionado',tarefaAdicionar})
+        return res.status(200).json({mensagem:'Tarefa adicionada',tarefaAdicionar})
 
     }catch(err){
-        console.log(err)
+        return res.status(500).json({ message: "Erro ao adicionar tarefa" });
     }
 }
-/* ------ Adicionar item na lista --------- */
+/* ------ fim adicionar item na lista --------- */
+
+/* ------ deletar item na lista --------- */
 const deletar_item = async (req,res) =>{
 
     //Campos necessário para deletar a tarefa na lista do usuário
@@ -89,8 +119,11 @@ const deletar_item = async (req,res) =>{
         console.log(err)
     }
 }
+
+/* ------ fim deletar item na lista --------- */
 export {
     cadastrarUsuario,
     adicionar_lista,
-    deletar_item
+    deletar_item,
+    pesquisarUsuarioId
 }

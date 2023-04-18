@@ -4,7 +4,7 @@ import Usuarios from "../models/User.js";
 const cadastrarUsuario = (body) => Usuarios.create(body)
 
 //Pesquisa de usuário
-const pesquisarUsuario = (body) => Usuarios.findOne(body)
+const pesquisarUsuarioPorId = (body) => Usuarios.findById(body)
 
 //adicionar tarefa na lista do usuário
 const adicionarTarefa = (usuario,id_tarefa, titulo,descricao) => Usuarios.findOneAndUpdate({usuario},{$push:{tarefas:{id_tarefa, titulo, descricao}}}, {new:true})
@@ -14,7 +14,7 @@ const deletarTarefa = (usuario,id_tarefa) => Usuarios.findOneAndUpdate({usuario}
 
 export default {
     cadastrarUsuario,
-    pesquisarUsuario,
+    pesquisarUsuarioPorId,
     adicionarTarefa,
     deletarTarefa
 }
