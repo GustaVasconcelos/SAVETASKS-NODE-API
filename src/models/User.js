@@ -20,6 +20,9 @@ const Usuario = new mongoose.Schema({
 //Criptogrando a senha do usuário
 Usuario.pre('save',async function(next){
 
+    if(!this.isModified("senha")){
+        return next()
+    }
     this.senha = await bcrypt.hash(this.senha, 10)
     next()
 })

@@ -5,14 +5,20 @@ import { cadastrarUsuario } from "../controllers/cadastrarUsuario/index.js";
 import { adicionarLista } from "../controllers/adicionarTarefa/index.js";
 import { deletarTarefa } from "../controllers/deletarTarefa/index.js";
 import { pesquisarTodosOsUsuarios } from "../controllers/pesquisarTodosOsUsuarios/index.js";
+import { login } from "../controllers/login/index.js";
+import { verificarToken } from "../controllers/verificarToken/index.js";
+import { deletarToken } from "../controllers/deletarToken/index.js";
 
 const route = Router()
 
 //Rotas disponiveis 
+route.get('/pesquisar_usuario/:id', pesquisarUsuarioId)
 route.get('/pesquisar_usuarios', pesquisarTodosOsUsuarios)
 route.post('/cadastro_usuario', cadastrarUsuario)
+route.post('/login', login)
+route.post('/verificar_token', verificarToken)
+route.post('/deletar_token', deletarToken)
 route.patch('/adicionar_tarefa', adicionarLista)
 route.patch('/deletar_tarefa', deletarTarefa)
-route.get('/pesquisar_usuario/:id', pesquisarUsuarioId)
 
 export default route

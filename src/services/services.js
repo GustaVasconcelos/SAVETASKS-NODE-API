@@ -7,8 +7,10 @@ const cadastrarUsuario = (body) => Usuarios.create(body)
 const pesquisarUsuarioPorId = (body) => Usuarios.findById(body)
 
 //Pesquisa de todos os usuários existente no banco
-
 const pesquisarTodosUsuarios = () => Usuarios.find()
+
+//pesquisar usuário pelo nome
+const pesquisarUsuarioPorNome = (usuario) => Usuarios.findOne({usuario:usuario}).select("+senha")
 
 //adicionar tarefa na lista do usuário
 const adicionarTarefa = (id_usuario,id_tarefa, titulo,descricao) => Usuarios.findByIdAndUpdate({_id:id_usuario},{$push:{tarefas:{id_tarefa, titulo, descricao}}}, {new:true})
@@ -21,5 +23,6 @@ export default {
     pesquisarUsuarioPorId,
     adicionarTarefa,
     deletarTarefa,
-    pesquisarTodosUsuarios
+    pesquisarTodosUsuarios,
+    pesquisarUsuarioPorNome
 }
