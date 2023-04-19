@@ -5,22 +5,22 @@ import servicos from '../../services/services.js'
 export const deletarTarefa = async (req,res) =>{
 
     //Campos necessário para deletar a tarefa na lista do usuário
-    const { usuario, id_tarefa} = req.body
+    const { id_usuario, id_tarefa} = req.body
 
     //Verificação se não há campos vázios
-    if(!usuario || !id_tarefa){
+    if(!id_usuario || !id_tarefa){
         return res.status(400).json({mensagem:"Preencha todos os campos"})
     }
 
     try{
         //Verificando se existe o usuário
-        const usuarioServico = await servicos.pesquisarUsuario({usuario})
+        const usuarioServico = await servicos.pesquisarUsuarioPorId(id_usuario)
         if(!usuarioServico){
             return res.status(400).json({mensagem:"Usuário não encontrado"})
         }
 
         //Deletando a tarefa na lista do usuário
-        const tarefaDeletar = await servicos.deletarTarefa(usuario,id_tarefa)
+        const tarefaDeletar = await servicos.deletarTarefa(id_usuario,id_tarefa)
 
         return res.status(200).json({mensagem:'tarefa deletado',tarefaDeletar})
 
