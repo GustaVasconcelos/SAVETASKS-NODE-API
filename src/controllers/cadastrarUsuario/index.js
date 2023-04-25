@@ -8,16 +8,16 @@ export const cadastrarUsuario = async (req, res) => {
     
     //Verificação se não há campos vázios
     if (!usuario || !senha || !confirmacao) {
-      return res.status(400).json({ message: "Preencha todos os campos" });
+      return res.status(200).json({ message: "Preencha todos os campos" , status:400});
     }
 
     //Verificação se as senhas são iguais
     if (senha !== confirmacao) {
-      return res.status(400).json({ message: "As senhas não correspondem" });
+      return res.status(200).json({ message: "As senhas não correspondem", status:400 });
     }
     //Verificação se a senha tem pelo menos 6 digitos
     if (senha.length < 6) {
-      return res.status(400).json({ message: "A senha deve ter no mínimo 6 caracteres" });
+      return res.status(200).json({ message: "A senha deve ter no mínimo 6 caracteres", status:400});
     }
     
     //Cadastrando o usuário no banco de dados

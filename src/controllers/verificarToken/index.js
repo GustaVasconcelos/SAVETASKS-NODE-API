@@ -8,11 +8,11 @@ export const verificarToken = (req,res) =>{
 
     //verificando se o token é válido
     if(!token){
-        return res.status(401).json({msg:"Token inválido"})
+        return res.status(200).json({msg:"Token inválido", status:401})
     }
     jwt.verify(token,process.env.SECRET_JWT,(err,decoded) =>{
         if(err){
-            return res.status(400).json({msg:"Token inválido"})
+            return res.status(200).json({msg:"Token inválido", status:400})
         }else{
             req.usuario = decoded.usuario
             return res.status(200).json({msg:"Token válido"})

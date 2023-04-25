@@ -7,7 +7,7 @@ export const deletarToken = (req,res) =>{
 
     //Excluindo o token
     if(!token){
-        res.status(401).json({message:"Logout não autorizado"})
+        res.status(200).json({message:"Logout não autorizado", status:401})
     }
     res.cookie('token',null,{httpOnly:true})
     res.status(200).json({mensagem:"Sessão finalizada"})

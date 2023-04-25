@@ -9,14 +9,14 @@ export const deletarTarefa = async (req,res) =>{
 
     //Verificação se não há campos vázios
     if(!id_usuario || !id_tarefa){
-        return res.status(400).json({mensagem:"Preencha todos os campos"})
+        return res.status(200).json({mensagem:"Preencha todos os campos", status:400})
     }
 
     try{
         //Verificando se existe o usuário
         const usuarioServico = await servicos.pesquisarUsuarioPorId(id_usuario)
         if(!usuarioServico){
-            return res.status(400).json({mensagem:"Usuário não encontrado"})
+            return res.status(200).json({mensagem:"Usuário não encontrado", status:400})
         }
 
         //Deletando a tarefa na lista do usuário

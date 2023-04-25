@@ -11,19 +11,19 @@ export const login = async (req,res) =>{
 
     //verificação se há todos os campos necessários
     if(!usuario || !senha){
-        return res.status(400).json({mensagem:"Há campos vázios"})
+        return res.status(200).json({mensagem:"Há campos vázios", status:400})
     }
     try{
         //Verificando se existe o usuário no banco de dados
         const usuarioBD = await servicos.pesquisarUsuarioPorNome(usuario)
 
         if(!usuarioBD){
-            return res.status(400).json({mensagem:"Usuário ou senha incorreta!"})
+            return res.status(200).json({mensagem:"Usuário ou senha incorreta!", status:400})
         }
         //Verificando se a senha está correta
         const senhaValida =  bcrypt.compareSync(senha, usuarioBD.senha)
         if (!senhaValida) {
-            return res.status(400).send({mensagem: "Usuário ou senha incorreta!" });
+            return res.status(200).send({mensagem: "Usuário ou senha incorreta!", status:400});
         }
 
         //Gerando o token pro usuário

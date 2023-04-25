@@ -14,6 +14,6 @@ export const pesquisarTodosOsUsuarios = async (req,res) =>{
         //Se caso houver usuários no banco
         res.status(200).json({mensagem:'Usuários encontrados',usuarios})
     }catch(err){
-        return res.status(400).json({mensagem: "Erro ao pesquisar pelo os usuários", err});
+        return res.status(500).json({mensagem: "Erro ao pesquisar pelo os usuários", err});
     }
 }

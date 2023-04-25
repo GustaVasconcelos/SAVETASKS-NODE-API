@@ -12,7 +12,7 @@ export const adicionarLista = async (req,res) =>{
 
     //Verificação se não há campos vázios
     if(!id_usuario || !titulo){
-        return res.status(400).json({mensagem:"Há campos vázios"})
+        return res.status(200).json({mensagem:"Há campos vázios", status:400})
     }
 
     try{
@@ -21,7 +21,7 @@ export const adicionarLista = async (req,res) =>{
         const usuarioServico = await servicos.pesquisarUsuarioPorId(id_usuario)
         console.log(usuarioServico)
         if(!usuarioServico){
-            return res.status(400).json({mensagem:"Usuário não encontrado"})
+            return res.status(200).json({mensagem:"Usuário não encontrado", status:400})
         }
 
         //Cadastrando a tarefa na lista do usuário
