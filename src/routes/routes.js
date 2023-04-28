@@ -14,10 +14,10 @@ const route = Router()
 //Rotas disponiveis 
 route.get('/pesquisar_usuario/:id', pesquisarUsuarioId)
 route.get('/pesquisar_usuarios', pesquisarTodosOsUsuarios)
+route.get('/verificar_token', verificarToken)
+route.get('/deletar_token', deletarToken)
 route.post('/cadastro_usuario', cadastrarUsuario)
 route.post('/login', login)
-route.post('/verificar_token', verificarToken)
-route.post('/deletar_token', deletarToken)
 route.patch('/adicionar_tarefa', adicionarLista)
 route.patch('/deletar_tarefa', deletarTarefa)
 
